@@ -1,47 +1,4 @@
-from ast import operator
 import keyword
-
-
-        # lines = self.file.readlines()
-        # for line in lines:
-        #     buffer = ""
-        #     self.leximBegin = 0
-        #     self.forward =0
-        #     index =0
-        #     while index < len(line):
-        #         if line[index]==" " or line[index] in self.__specialCharacters:
-        #             self.leximBegin=index+1
-        #             if  buffer in self.__is_operators:
-        #                 print(f"{buffer} : Operator")
-        #             elif buffer in self.__specialCharacters:
-        #                 print(f"{buffer} : Special Character")
-        #             # elif self.is_identifier(buffer):
-        #             #     print(f"{buffer} : Identifier")
-        #             elif self.is_keyword(buffer):
-        #                 print(f"{buffer} : Keyword")
-        #             elif buffer in self.__numbers:
-        #                 print(f"{buffer} : Number")
-                    
-        #             if line[index] in self.__specialCharacters:
-                        
-        #                 print(f"{line[index]} : Special Character")
-        #         if line[index] in self.__is_operators:
-        #                 temp = line[index]
-        #                 while temp in self.__is_operators:
-        #                     index+=1
-        #                     temp += line[index]
-        #                 print(f"{temp} : Special Character")
-
-
-                    
-                
-        #         self.forward+=1
-        #         buffer=line[self.leximBegin:self.forward]
-        #         index+=1
-
-import keyword
-from re import L
-from symtable import symtable
 class Lexical:
     def __init__(self,filePath) -> None:
         self.file = open(filePath,'r')
@@ -56,6 +13,7 @@ class Lexical:
 
     
     def scanner(self):
+        """Buffer technique"""
 
         lines = self.file.readlines()
         
@@ -106,13 +64,16 @@ class Lexical:
                     leximBegin=forward
                     while True:
                         forward+=1
-                        temp+=line[forward]
-                        if temp == " ":
-                            
-                            
-                            index = forward
-                        else:
-                            break   
+                        try:
+                            temp+=line[forward]
+                            if temp == " ":
+                                
+                                
+                                index = forward
+                            else:
+                                break  
+                        except:
+                            break
                     if leximBegin<forward:
                         if leximBegin<forward:
                             if line[leximBegin:forward] != ' ' and line[leximBegin:forward] != '':
@@ -137,48 +98,6 @@ class Lexical:
 
                 index+=1
                 forward = index
-
-                    # try:
-                    #     buffer+=line[leximBegin:forward]
-                    #     print(line,leximBegin,forward)
-                    #     print(f"{buffer} :  back")
-                    #     leximBegin = forward
-                    #     buffer = ''
-                    # except:
-                    #     print("SOrry ")
-                    # operator = line[forward]
-                    # temp = index
-                    # while True:
-                    #     temp+=1
-                    #     operator+= line[temp]
-                    #     if operator in self.__is_operators:
-                    #         index=temp
-                    #     else:
-                    #         break
-                    # print(f"{buffer} : Buffer After")
-
-                    
-
-
-                
-                # if line[index] == " ":
-
-                #     try:
-                #         buffer+=line[leximBegin:forward]
-                #         print(f"{buffer} :  back")
-                #         leximBegin = forward
-                #         buffer = ''
-                #     except:
-                #         print("SOrry ")
-                # index+=1
-                # forward = index
-                
-
- 
-
-
-         
-            
             
         
     def name(self, language,type):
@@ -235,6 +154,7 @@ class Lexical:
         return True
     
     def scan(self):
+        """Using pythonic approach"""
         language = self.file.readlines()
         li=[]
         l=[]
@@ -293,7 +213,6 @@ class Lexical:
      
 
         for i in t:
-            # print(i)
             if  self.is_keyword(i):
                 self.symbolTable_dic[i]="Keyword"
             elif self.is_identifier(i):
@@ -341,19 +260,15 @@ class Lexical:
             elif i in self.__specialCharacters:
                 self.buffer_symbol_table.append((i,"Special Character"))
                 
-            # else:
-            #     self.show_bufferSymbolTable.append((i,"Identifier"))
-            #     a.append((i,"Identifier"))
         
         for i,j in self.buffer_symbol_table:
             print(f"<{i} : {j}>")
 
 
-a=Lexical('file.py')
-a.scanner()
+a=Lexical('bookAllocation.py')
+a.scanner()#using buffer method
 a.show_bufferSymbolTable()
-print(a.ans)
-# print(a.ans)
-# a.show_symbolTable()
+
+
 
     
