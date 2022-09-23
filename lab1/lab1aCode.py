@@ -241,7 +241,11 @@ class Lexical:
         # a=self.buffer_symbol_table
         # for key,value in self.symbolTable_dic.items():
         #     print(f"{key} : {value}")
+        print()
         print(self.ans)
+        print("*****************************************************************************************************")
+        print("Printing symbol table")
+        print()
         for i in self.ans:
             # print(i)
             if  self.is_keyword(i):
