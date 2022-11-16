@@ -29,14 +29,27 @@ def driver(directory:str)->None:
 
     final_answer = []
 
-
-    for i in range(len(a)):
+    if len(a)!=0:
         fd = f+"'"
-        part1 = f + "->" + beta[i] + fd    
-        part2 = fd+"->"+a[i]+fd+"|Epshila"
+        part1 = f + "->"
+        part2 = fd+"->"
+        for i in range(len(a)):
+        
+            if i==len(a)-1:
+                part1 += beta[i] + fd  
+            else:
+                part1 += beta[i] + fd  + "|"
+
+            part2 += a[i]+fd  + "|"
+        
+
+        part2+= "Epshila"
         final_answer.append(part1)
         final_answer.append(part2)
+        
         printans(final_answer)
+    else:
+        print("Sorry no left recursion found")
 
 
 if __name__ == "__main__":
